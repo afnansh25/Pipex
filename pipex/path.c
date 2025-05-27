@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:22:25 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/25 11:51:21 by codespace        ###   ########.fr       */
+/*   Updated: 2025/05/27 15:27:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,6 @@ char    *build_cmd_path(char **paths, char *cmd)
         i++;
     }
     return (NULL);
-}
-void	free_path(char **arr)
-{
-	int	i;
-
-    i = 0;
-	while (arr[i])
-    {
-		free(arr[i]);
-        i++;
-    }
-	free(arr);
 }
 
 char    *get_cmd_path(char *cmd, char **envp)

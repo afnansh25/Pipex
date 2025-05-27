@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:29:56 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/05/25 11:25:05 by codespace        ###   ########.fr       */
+/*   Updated: 2025/05/27 15:21:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,3 +86,18 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
     } 
     return (0);
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	if (s == NULL)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
