@@ -6,26 +6,27 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:48:19 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/27 15:54:53 by codespace        ###   ########.fr       */
+/*   Updated: 2025/05/28 18:05:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	init_pipex(t_pipex *px, char *file1, char *file2, char *cmd1, char *cmd2)
+void	init_pipex(t_pipex *px, char **av)
 {
-	px->args1 = parse_cmd(cmd1);
-	px->args2 = parse_cmd(cmd2);
+	px->args1 = parse_cmd(px->cmd1);
+	px->args2 = parse_cmd(px->cmd2);
 	check_cmd(px->args1, "cmd1");
 	check_cmd(px->args2, "cmd2");
-	px->fd1 = open(file1, O_RDONLY);
+	px->fd1 = open(px->file1, O_RDONLY);
 	if (px->fd1 < 0)
 	{
 		free_path(px->args1);
 		free_path(px->args2);
 		error_exit("Error opening infile");
 	}
-	px->fd2 = open(file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	px->fd2 = open(px->file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (px->fd2 < 0)
 	{
 		free_path(px->args1);
 		free_path(px->args2);
@@ -61,11 +62,8 @@ void	cleanup_pipex(t_pipex *px)
 	free_path(px->args2);
 }
 
-void	pipex(char *file1, char *file2, char *cmd1, char *cmd2, char **envp)
+void	pipex(t_pipex px, char **envp)
 {
-	t_pipex	px;
-
-	init_pipex(&px, file1, file2, cmd1, cmd2);
 	init_fds(&px);
 	execute_pipeline(&px, envp);
 	cleanup_pipex(&px);

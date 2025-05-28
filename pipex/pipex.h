@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 17:57:21 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/05/27 15:28:17 by codespace        ###   ########.fr       */
+/*   Updated: 2025/05/28 17:57:44 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_pipex
 	int		pipe_fd[2];
 	pid_t	pid1;
 	pid_t	pid2;
+	char	*file1;
+	char	*file2;
+	char	*cmd1;
+	char	*cmd2;
 	char	**args1;
 	char	**args2;
 }	t_pipex;
@@ -41,8 +45,8 @@ char    *ft_strjoin(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
 
 //pipex
-void	pipex(char *file1, char *file2, char *cmd1, char *cmd2, char **envp);
-void	init_pipex(t_pipex *px, char *file1, char *file2, char *cmd1, char *cmd2);
+void	pipex(t_pipex, char **envp);
+void	init_pipex(t_pipex *px, char **av);
 void	init_fds(t_pipex *px);
 void	execute_pipeline(t_pipex *px, char **envp);
 void	cleanup_pipex(t_pipex *px);
