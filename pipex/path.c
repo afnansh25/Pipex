@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:22:25 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/27 15:27:44 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 19:08:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char    *build_cmd_path(char **paths, char *cmd)
     {
         tmp = ft_strjoin(paths[i], "/");
         full_path = ft_strjoin(tmp, cmd);
+        if (!full_path)
+            cleanup_and_exit(NULL, "Memory allocation failed\n", 1);
         free(tmp);
         if (access(full_path, X_OK) == 0)
             return(full_path);
@@ -54,10 +56,10 @@ char    *get_cmd_path(char *cmd, char **envp)
 
     path_str = find_path_varible(envp);
     if (!path_str)
-        return (NULL);
+        cleanup_and_exit(NULL, "PATH variable not found\n", 1);
     paths = ft_split(path_str, ':');
     if (!paths)
-        return (NULL);
+        cleanup_and_exit(NULL, "Memory allocation failed\n", 1);
     full_path = build_cmd_path(paths, cmd);
     free_path(paths);
     return (full_path);

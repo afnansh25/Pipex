@@ -6,21 +6,21 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:40:10 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/25 16:43:10 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/15 16:08:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**parse_cmd(char *cmd)
-{
-    char    **cmd_array;
+// char	**parse_cmd(char *cmd)
+// {
+//     char    **cmd_array;
     
-	if (!*cmd)
-        return (NULL);
-    cmd_array = ft_split(cmd, ' ');
-	return (cmd_array);
-}
+// 	if (!*cmd)
+//         return (NULL);
+//     cmd_array = ft_split(cmd, ' ');
+// 	return (cmd_array);
+// }
 
 // char	**parse_cmd(char *cmd)
 // {

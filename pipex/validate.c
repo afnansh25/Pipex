@@ -6,13 +6,12 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:20:21 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/27 14:49:35 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 19:17:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// Function to validate the command line arguments
 void	validate_inputs(int ac, char **av)
 {
 	if (ac != 5)
@@ -40,6 +39,35 @@ void	validate_inputs(int ac, char **av)
 		ft_putstr_fd("Error: outfile is missing or empty\n", 2);
 		exit(1);
 	}
+}
+
+int	is_only_whitespace(const char *str)
+{
+	int	i;
+
+	if (!str)
+		return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n' &&
+			str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+char	**parse_cmd(t_pipex *px, char *cmd)
+{
+    char    **cmd_array;
+    
+	if (!cmd || is_only_whitespace(cmd))
+        cleanup_and_exit(px, "pipex: invalid command\n", 1);
+    cmd_array = ft_split(cmd, ' ');
+	if(!cmd_array)
+		cleanup_and_exit(px, "Memory allocation failed\n", 1);
+	return (cmd_array);
 }
 
 void	check_cmd(char **cmd, char *label)

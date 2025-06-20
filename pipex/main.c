@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 18:00:24 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/05/28 17:57:02 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/15 16:16:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	main(int ac, char **av, char **envp)
 {
-	char	*file1;
-	char	*cmd1;
-	char	*cmd2;
-	char	*file2;
+	t_pipex px;
 
 	validate_inputs(ac, av);
 	init_pipex(&px, av);

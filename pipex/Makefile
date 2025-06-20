@@ -1,6 +1,6 @@
 NAME = pipex
 
-SRC = main.c ft_split.c str_utils.c pars.c path.c pipex.c execute.c validate.c clean.c error.c	
+SRC = main.c ft_split.c str_utils.c path.c pipex.c execute.c validate.c clean.c error.c	
 
 OBJ = $(SRC:.c=.o)
 

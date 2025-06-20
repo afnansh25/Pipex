@@ -6,16 +6,31 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:48:19 by codespace         #+#    #+#             */
-/*   Updated: 2025/05/28 18:05:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 19:26:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+void	init_pipex_struct(t_pipex *px)
+{
+	px->fd1 = -1;
+	px->fd2 = -1;
+	px->pipe_fd[0] = -1;
+	px->pipe_fd[1] = -1;
+	px->args1 = NULL;
+	px->args2 = NULL;
+}
+
 void	init_pipex(t_pipex *px, char **av)
 {
-	px->args1 = parse_cmd(px->cmd1);
-	px->args2 = parse_cmd(px->cmd2);
+	init_pipex_struct(px);
+	px->file1 = av[1];
+	px->cmd1 = av[2];
+	px->cmd2 = av[3];
+	px->file2 = av[4];
+	px->args1 = parse_cmd(px, px->cmd1);
+	px->args2 = parse_cmd(px, px->cmd2);
 	check_cmd(px->args1, "cmd1");
 	check_cmd(px->args2, "cmd2");
 	px->fd1 = open(px->file1, O_RDONLY);
@@ -34,20 +49,14 @@ void	init_pipex(t_pipex *px, char **av)
 	}
 }
 
-void	init_fds(t_pipex *px)
-{
-	if (pipe(px->pipe_fd) == -1)
-		error_exit("pipe failed");
-}
-
 void	execute_pipeline(t_pipex *px, char **envp)
 {
 	px->pid1 = fork();
 	if (px->pid1 == 0)
-		run_child1(px->fd1, px->pipe_fd, px->args1, envp);
+		run_child1(px, envp);
 	px->pid2 = fork();
 	if (px->pid2 == 0)
-		run_child2(px->fd2, px->pipe_fd, px->args2, envp);
+		run_child2(px, envp);
 }
 
 void	cleanup_pipex(t_pipex *px)
@@ -62,9 +71,10 @@ void	cleanup_pipex(t_pipex *px)
 	free_path(px->args2);
 }
 
-void	pipex(t_pipex px, char **envp)
+void	pipex(t_pipex *px, char **envp)
 {
-	init_fds(&px);
-	execute_pipeline(&px, envp);
-	cleanup_pipex(&px);
+	if (pipe(px->pipe_fd) == -1)
+		error_exit("pipe failed");
+	execute_pipeline(px, envp);
+	cleanup_pipex(px);
 }

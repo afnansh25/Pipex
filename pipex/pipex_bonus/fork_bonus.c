@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:32:32 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 16:28:14 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 17:12:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ void	execute_cmd(t_pipex *px, int i)
 	if (!cmd_args || !cmd_args[0] || cmd_args[0][0] == '\0')
 	{
 		free_arr(cmd_args);
-		error_msg("fork: command not found");
+		free_all(px);
+		error_msg("command not found");
 	}
 	cmd_path = get_cmd_path(cmd_args[0], px->envp);
 	if (!cmd_path)
 	{
 		free_arr(cmd_args);
-		error_msg("fork: command not found");
+		free_all(px);
+		error_msg("command not found");
 	}
 	execve(cmd_path, cmd_args, px->envp);
 	free(cmd_path);

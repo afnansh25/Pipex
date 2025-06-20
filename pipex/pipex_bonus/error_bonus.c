@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:33:08 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 16:12:08 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 17:06:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void free_all(t_pipex *px)
 {
     int i;
 
-    if (px->infile != -1) close(px->infile);
-    if (px->outfile != -1) close(px->outfile);
+    if (px->infile != -1) 
+        close(px->infile);
+    if (px->outfile != -1) 
+        close(px->outfile);
     if (px->pipes)
     {
         i = 0;

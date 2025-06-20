@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 17:57:21 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/05/28 17:57:44 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 19:26:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ char    *ft_strjoin(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
 
 //pipex
-void	pipex(t_pipex, char **envp);
+void	pipex(t_pipex *px, char **envp);
 void	init_pipex(t_pipex *px, char **av);
-void	init_fds(t_pipex *px);
 void	execute_pipeline(t_pipex *px, char **envp);
 void	cleanup_pipex(t_pipex *px);
 
 //execute
-void	run_child1(int fd1, int *pipe_fd, char **args, char **envp);
-void	run_child2(int fd2, int *pipe_fd, char **args, char **envp);
+void	run_child1(t_pipex *px, char **envp);
+void	run_child2(t_pipex *px, char **envp);
 
 //validate
 void	validate_inputs(int ac, char **av);
+char	**parse_cmd(t_pipex *px, char *cmd);
 void	check_cmd(char **cmd, char *label);
 
 //error
@@ -66,9 +66,10 @@ void	error_exit(char *msg);
 //clean
 void	free_path(char **path);
 void	close_fds(int fd1, int fd2, int *pipe_fd);
+void	cleanup_and_exit(t_pipex *px, char *err_msg, int errcode);
 
 //pars
-char	**parse_cmd(char *cmd);
+// char	**parse_cmd(char *cmd);
 
 //path
 char    *get_cmd_path(char *cmd, char **envp);
