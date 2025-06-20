@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:02:24 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 13:45:56 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 16:15:55 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 # include <errno.h>
 
 # define BUFFER_SIZE 1024
-# define READ_END 0
-# define WRITE_END 1
 
 typedef struct s_pipex
 {
@@ -60,6 +58,7 @@ void	fork_commands(t_pipex *px);
 void	run_child(t_pipex *px, int i);
 
 //error_bonus.c
+void	error_msg(char *msg);
 void	error_exit(char *msg);
 void	free_arr(char **split);
 void	free_all(t_pipex *px);

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:32:56 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/19 13:41:34 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 15:00:34 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,6 @@ void	close_all(t_pipex *px)
             i++;
         }
     }
-    // while (i < px->cmd_count - 1)
-    // {
-    //     close(px->pipes[i][READ_END]);
-    //     close(px->pipes[i][WRITE_END]);
-    //     free(px->pipes[i]);
-    //     i++;
-    // }
     free(px->pipes);
     px->pipes = NULL;
 }

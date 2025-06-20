@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:32:36 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/18 13:16:03 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/20 16:25:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	**parse_cmd(const char *cmd)
 {
     char    **cmd_array;
     
-	if (!*cmd)
+	if (!cmd || !*cmd)
         return (NULL);
     cmd_array = ft_split(cmd, ' ');
 	return (cmd_array);
