@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:27:06 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 19:23:41 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 08:36:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,25 @@ void	free_path(char **path)
 	free(path);
 }
 
-void	close_fds(int fd1, int fd2, int *pipe_fd)
+void	cleanup_and_exit(t_pipex *px, char *msg, int status)
 {
-	close(fd1);
-	close(fd2);
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	if (px->fd1 != -1)
+		close(px->fd1);
+	if (px->fd2 != -1)
+		close(px->fd2);
+	if (px->pipe_fd[0] != -1)
+		close(px->pipe_fd[0]);
+	if (px->pipe_fd[1] != -1)
+		close(px->pipe_fd[1]);
+	if (px->args1)
+		free_path(px->args1);
+	if (px->args2)
+		free_path(px->args2);
+	if (msg)
+	{
+		write(2, msg, ft_strlen(msg));
+		write(2, "\n", 1);
+	}
+	exit(status);
 }
 
-void	cleanup_and_exit(t_pipex *px, char *err_msg, int errcode)
-{
-	if (px->fd1 > 0)
-		close(px->fd1);
-	if (px->fd2 > 0)
-		close(px->fd2);
-	if (px->pipe_fd[0] >= 0)
-		close(px->pipe_fd[0]);
-	if (px->pipe_fd[1] >= 0)
-		close(px->pipe_fd[1]);
-	free_path(px->args1);
-	free_path(px->args2);
-	if (err_msg)
-		ft_putstr_fd(err_msg, 2);
-	exit(errcode);
-}

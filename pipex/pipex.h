@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 17:57:21 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/06/20 19:26:14 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 08:38:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char    *ft_strjoin(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
 
+//str_utils2
+char	*ft_strchr(const char *s, int c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_strdup(const char *s);
+
 //pipex
 void	pipex(t_pipex *px, char **envp);
 void	init_pipex(t_pipex *px, char **av);
@@ -59,20 +64,13 @@ void	validate_inputs(int ac, char **av);
 char	**parse_cmd(t_pipex *px, char *cmd);
 void	check_cmd(char **cmd, char *label);
 
-//error
-void	print_cmd_error(char *cmd);
-void	error_exit(char *msg);
-
 //clean
 void	free_path(char **path);
-void	close_fds(int fd1, int fd2, int *pipe_fd);
 void	cleanup_and_exit(t_pipex *px, char *err_msg, int errcode);
 
-//pars
-// char	**parse_cmd(char *cmd);
-
 //path
+char    *find_path_varible(char **envp);
+char    *build_cmd_path(char **paths, char *cmd);
 char    *get_cmd_path(char *cmd, char **envp);
-
 
 #endif

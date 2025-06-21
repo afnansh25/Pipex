@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:48:19 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 19:26:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 08:34:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,10 @@ void	init_pipex(t_pipex *px, char **av)
 	check_cmd(px->args2, "cmd2");
 	px->fd1 = open(px->file1, O_RDONLY);
 	if (px->fd1 < 0)
-	{
-		free_path(px->args1);
-		free_path(px->args2);
-		error_exit("Error opening infile");
-	}
+		cleanup_and_exit(px, "Error opening infile", 1);
 	px->fd2 = open(px->file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (px->fd2 < 0)
-	{
-		free_path(px->args1);
-		free_path(px->args2);
-		error_exit("Error opening infile");
-	}
+		cleanup_and_exit(px, "Error opening outfile", 1);
 }
 
 void	execute_pipeline(t_pipex *px, char **envp)
@@ -74,7 +66,7 @@ void	cleanup_pipex(t_pipex *px)
 void	pipex(t_pipex *px, char **envp)
 {
 	if (pipe(px->pipe_fd) == -1)
-		error_exit("pipe failed");
+		cleanup_and_exit(px, "pipe failed", 1);
 	execute_pipeline(px, envp);
 	cleanup_pipex(px);
 }

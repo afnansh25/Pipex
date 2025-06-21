@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:20:21 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 19:17:51 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 08:15:34 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ char	**parse_cmd(t_pipex *px, char *cmd)
     char    **cmd_array;
     
 	if (!cmd || is_only_whitespace(cmd))
-        cleanup_and_exit(px, "pipex: invalid command\n", 1);
+        cleanup_and_exit(px, "pipex: invalid command", 1);
     cmd_array = ft_split(cmd, ' ');
 	if(!cmd_array)
-		cleanup_and_exit(px, "Memory allocation failed\n", 1);
+		cleanup_and_exit(px, "Memory allocation failed", 1);
 	return (cmd_array);
 }
 
