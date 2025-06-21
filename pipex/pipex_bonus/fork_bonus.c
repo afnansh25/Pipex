@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:32:32 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 17:12:22 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 09:10:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	execute_cmd(t_pipex *px, int i)
 	execve(cmd_path, cmd_args, px->envp);
 	free(cmd_path);
 	free_arr(cmd_args);
+	free_all(px);
 	error_msg("fork: execve failed");
 }
 

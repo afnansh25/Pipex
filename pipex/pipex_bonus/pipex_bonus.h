@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:02:24 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 16:15:55 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/21 09:00:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_pipex
 }	t_pipex;
 
 //init_bonus.c
+void	init_pipex(t_pipex *px, int ac, char **av, char **envp);
 void	init_pipex_struct(t_pipex *px, int ac, char **av, char **envp);
 void	check_here_doc(t_pipex *px);
 
