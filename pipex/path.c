@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 11:22:25 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/21 08:34:08 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/22 08:30:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ char    *get_cmd_path(char *cmd, char **envp)
 		    return (NULL);
     }
     path_str = find_path_varible(envp);
-    if (!path_str)
-        cleanup_and_exit(NULL, "PATH variable not found", 1);
+    if (!path_str || path_str[0] == '\0')
+        return (NULL);
     paths = ft_split(path_str, ':');
     if (!paths)
         cleanup_and_exit(NULL, "Memory allocation failed", 1);

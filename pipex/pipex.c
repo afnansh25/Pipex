@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:48:19 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/21 08:34:50 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/22 08:03:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	init_pipex(t_pipex *px, char **av)
 	px->fd1 = open(px->file1, O_RDONLY);
 	if (px->fd1 < 0)
 		cleanup_and_exit(px, "Error opening infile", 1);
-	px->fd2 = open(px->file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (px->fd2 < 0)
-		cleanup_and_exit(px, "Error opening outfile", 1);
+	// px->fd2 = open(px->file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	// if (px->fd2 < 0)
+	// 	cleanup_and_exit(px, "Error opening outfile", 1);
 }
 
 void	execute_pipeline(t_pipex *px, char **envp)
@@ -46,21 +46,16 @@ void	execute_pipeline(t_pipex *px, char **envp)
 	px->pid1 = fork();
 	if (px->pid1 == 0)
 		run_child1(px, envp);
+	close(px->fd1);
+	close(px->pipe_fd[1]);
+	px->fd2 = open(px->file2, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (px->fd2 < 0)
+		cleanup_and_exit(px, "Error opening outfile", 1);
 	px->pid2 = fork();
 	if (px->pid2 == 0)
 		run_child2(px, envp);
-}
-
-void	cleanup_pipex(t_pipex *px)
-{
-	close(px->fd1);
 	close(px->fd2);
 	close(px->pipe_fd[0]);
-	close(px->pipe_fd[1]);
-	waitpid(px->pid1, NULL, 0);
-	waitpid(px->pid2, NULL, 0);
-	free_path(px->args1);
-	free_path(px->args2);
 }
 
 void	pipex(t_pipex *px, char **envp)
@@ -68,5 +63,8 @@ void	pipex(t_pipex *px, char **envp)
 	if (pipe(px->pipe_fd) == -1)
 		cleanup_and_exit(px, "pipe failed", 1);
 	execute_pipeline(px, envp);
-	cleanup_pipex(px);
+	waitpid(px->pid1, NULL, 0);
+	waitpid(px->pid2, NULL, 0);
+	free_path(px->args1);
+	free_path(px->args2);
 }

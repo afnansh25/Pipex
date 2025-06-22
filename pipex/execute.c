@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:46:44 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/21 08:36:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/22 08:32:20 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	run_child1(t_pipex *px, char **envp)
 	close(px->pipe_fd[1]);
 	cmd_path = get_cmd_path(px->args1[0], envp);
 	if (!cmd_path)
-		cleanup_and_exit(px, "pipex: command not found", 127);
+		cleanup_and_exit(px, "command 1 not found", 127);
 	execve(cmd_path, px->args1, envp);
 	perror("execve failed");
 	free(cmd_path);
@@ -41,7 +41,7 @@ void	run_child2(t_pipex *px, char **envp)
 	close(px->pipe_fd[1]);
 	cmd_path = get_cmd_path(px->args2[0], envp);
 	if (!cmd_path)
-		cleanup_and_exit(px, "pipex: command not found", 127);
+		cleanup_and_exit(px, "command 2 not found", 127);
 	execve(cmd_path, px->args2, envp);
 	perror("execve failed");
 	free(cmd_path);

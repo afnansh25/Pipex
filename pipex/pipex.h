@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 17:57:21 by ashaheen          #+#    #+#             */
-/*   Updated: 2025/06/21 08:38:00 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/22 08:04:15 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*ft_strdup(const char *s);
 void	pipex(t_pipex *px, char **envp);
 void	init_pipex(t_pipex *px, char **av);
 void	execute_pipeline(t_pipex *px, char **envp);
-void	cleanup_pipex(t_pipex *px);
 
 //execute
 void	run_child1(t_pipex *px, char **envp);
