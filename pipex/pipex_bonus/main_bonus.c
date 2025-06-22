@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:38:15 by codespace         #+#    #+#             */
-/*   Updated: 2025/06/20 16:12:20 by codespace        ###   ########.fr       */
+/*   Updated: 2025/06/22 09:47:49 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	pipex;
 
 	if (ac < 5)
-		error_msg("Usage: ./pipex_bonus here_doc LIMITER cmd1 cmd2 ... outfile");
+		error_msg("Missing arguments");
 	init_pipex_struct(&pipex, ac, av, envp);
 	if (pipex.here_doc)
 	{
